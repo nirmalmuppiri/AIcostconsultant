@@ -126,7 +126,224 @@ body {
     color: #d1d5db;
 }
 
-/* PDF Upload Card */
+/* Privacy Notice */
+.privacy-notice {
+    background: #ecfdf5;
+    border: 2px solid #10b981;
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.privacy-icon {
+    font-size: 32px;
+    flex-shrink: 0;
+}
+
+.privacy-text {
+    font-size: 15px;
+    color: #065f46;
+    line-height: 1.6;
+}
+
+.privacy-text strong {
+    font-weight: 700;
+    color: #047857;
+}
+
+/* Before/After Comparison Slider */
+.comparison-container {
+    background: #f9fafb;
+    border: 3px solid #e5e7eb;
+    border-radius: 16px;
+    padding: 30px;
+    margin-bottom: 20px;
+}
+
+.comparison-slider {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.comparison-image-wrapper {
+    position: relative;
+    width: 100%;
+    user-select: none;
+}
+
+.comparison-after {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.comparison-before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    overflow: hidden;
+    z-index: 2;
+}
+
+.comparison-before img {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: auto;
+}
+
+/* Slider Handle */
+.comparison-handle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: #10b981;
+    cursor: ew-resize;
+    z-index: 3;
+    transform: translateX(-50%);
+}
+
+.handle-line {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 40%;
+    background: #10b981;
+}
+
+.handle-line:first-child {
+    top: 0;
+}
+
+.handle-line:last-child {
+    bottom: 0;
+}
+
+.handle-circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 48px;
+    height: 48px;
+    background: #10b981;
+    border: 4px solid white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 12px rgba(16, 185, 129, 0.4);
+    transition: transform 0.2s;
+}
+
+.comparison-handle:hover .handle-circle {
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+.comparison-handle:active .handle-circle {
+    transform: translate(-50%, -50%) scale(0.95);
+}
+
+/* Comparison Labels */
+.comparison-label {
+    position: absolute;
+    top: 10px;
+    z-index: 4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    pointer-events: none;
+}
+
+.comparison-label-left {
+    left: 10px;
+    transition: opacity 0.3s ease;
+}
+
+.comparison-label-right {
+    right: 10px;
+    transition: opacity 0.3s ease;
+}
+
+.label-badge {
+    background: #B0B5BC;
+    color: black;
+    padding: 8px 18px;
+    border-radius: 24px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.comparison-label-right .label-badge {
+    background: rgba(168, 213, 226, 0.95);
+    color: #111827;
+}
+
+.label-text {
+    background: rgba(255, 255, 255, 0.98);
+    color: #111827;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    border: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Upload Action */
+.upload-action {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.btn-upload {
+    background: #10b981;
+    color: white;
+    border: none;
+    padding: 16px 32px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.btn-upload:hover {
+    background: #059669;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
+}
+
+.btn-upload:active {
+    transform: translateY(0);
+}
+
+.upload-hint {
+    margin-top: 12px;
+    font-size: 13px;
+    color: #6b7280;
+    font-weight: 500;
+}
+
+/* PDF Upload Card (old) - keeping for backward compatibility */
 .pdf-card {
     background: #f9fafb;
     border: 3px dashed #d1fae5;

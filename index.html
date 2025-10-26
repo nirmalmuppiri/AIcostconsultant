@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CostConsultant - Smart Statement Analysis</title>
+    <title>FinanceAI - Smart Statement Analysis</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
@@ -12,7 +12,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
-            <a class="navbar-brand" href="#">CostConsultant</a>
+            <a class="navbar-brand" href="#">FinanceAI</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -45,16 +45,61 @@
                     <div class="step-number">1</div>
                     <div class="step-title">Upload your bank statement</div>
                 </div>
-                
-                <div class="pdf-card" id="pdfCard">
-                    <div class="checkmark-circle">
-                        <div class="checkmark"></div>
+
+                <!-- Privacy Notice -->
+                <div class="privacy-notice">
+                    <div class="privacy-icon">🔒</div>
+                    <div class="privacy-text">
+                        <strong>Your privacy matters.</strong> Remove personal details before uploading. 
+                        We only need transaction data - not your name, address, or account numbers.
                     </div>
-                    
-                    <div class="pdf-preview">
-                        <img src="bankss.png" 
-                             alt="Bank Statement" 
-                             style="width: 100%; height: auto; border-radius: 8px;">
+                </div>
+
+                <!-- Before/After Slider -->
+                <div class="comparison-container" id="comparisonContainer">
+                    <div class="comparison-slider">
+                        <div class="comparison-image-wrapper">
+                            <!-- After image (without personal data) -->
+                            <img src="bankss.png" alt="Statement without personal data" class="comparison-after">
+                            
+                            <!-- Before image (with personal data) -->
+                            <div class="comparison-before" id="beforeImage" style="width: 50%;">
+                                <img src="bankss-bw.png" alt="Statement with personal data">
+                            </div>
+
+                            <!-- Slider handle -->
+                            <div class="comparison-handle" id="sliderHandle" style="left: 50%;">
+                                <div class="handle-line"></div>
+                                <div class="handle-circle">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M15 18l-6-6 6-6" stroke="white" stroke-width="2"/>
+                                        <path d="M9 18l6-6-6-6" stroke="white" stroke-width="2"/>
+                                    </svg>
+                                </div>
+                                <div class="handle-line"></div>
+                            </div>
+
+                            <!-- Labels -->
+                            <div class="comparison-label comparison-label-left">
+                                <span class="label-badge">Before</span>
+                                <span class="label-text">With Personal Data</span>
+                            </div>
+                            <div class="comparison-label comparison-label-right">
+                                <span class="label-badge">After</span>
+                                <span class="label-text">Personal Data Removed</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Upload Button -->
+                    <div class="upload-action">
+                        <button class="btn-upload" id="uploadBtn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
+                            </svg>
+                            Upload Anonymized Statement
+                        </button>
+                        <p class="upload-hint">Click after you've removed personal information</p>
                     </div>
                 </div>
             </div>
