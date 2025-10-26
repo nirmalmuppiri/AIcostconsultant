@@ -3,44 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PDF Text Extractor</title>
+    <title>CostConsultant - Smart Statement Analysis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>📄 PDF Text Extractor</h1>
-        <p class="subtitle">Upload a PDF to extract all text content</p>
-        
-        <div class="upload-area" id="uploadArea">
-            <div class="upload-icon">📤</div>
-            <div class="upload-text">Click to upload or drag and drop</div>
-            <div class="upload-hint">PDF files only</div>
-            <input type="file" id="fileInput" accept=".pdf">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">CostConsultant</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#pricing">Pricing</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><button class="btn btn-primary ms-3">Get Started</button></li>
+                </ul>
+            </div>
         </div>
-        
-        <div class="progress-container" id="progressContainer">
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressFill"></div>
-            </div>
-            <div class="progress-text" id="progressText">Processing...</div>
-        </div>
-        
-        <div class="result-area" id="resultArea">
-            <div class="result-header">
-                <h2>Extracted Text</h2>
-                <button class="btn-clear" id="btnClear">Clear & Upload New</button>
-            </div>
-            
-            <div class="stats">
-                <div class="stat-item">📄 Pages: <span id="pageCount">0</span></div>
-                <div class="stat-item">📝 Characters: <span id="charCount">0</span></div>
-            </div>
-            
-            <div class="text-output" id="textOutput"></div>
+    </nav>
+
+    <!-- Hero -->
+    <div class="hero">
+        <div class="container">
+            <h1>Transform Bank Statements into Insights</h1>
+            <p>AI-Powered Analysis. 100% Private. Lightning Fast.</p>
         </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <!-- Flow Card -->
+    <div class="container">
+        <div class="flow-card">
+            
+            <!-- Step 1: Upload Statement -->
+            <div class="step-container active" id="step1">
+                <div class="step-header">
+                    <div class="step-number">1</div>
+                    <div class="step-title">Upload your bank statement</div>
+                </div>
+                
+                <div class="pdf-card" id="pdfCard">
+                    <div class="checkmark-circle">
+                        <div class="checkmark"></div>
+                    </div>
+                    
+                    <div class="pdf-preview">
+                        <img src="bankss.png" 
+                             alt="Bank Statement" 
+                             style="width: 100%; height: auto; border-radius: 8px;">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Processing -->
+            <div class="processing-container" id="processing">
+                <div class="spinner"></div>
+                <p class="processing-text">Analyzing your statement...</p>
+            </div>
+
+            <!-- Results -->
+            <div class="results-container" id="results">
+                <div class="text-center">
+                    <span class="results-badge">✓ Analysis Complete!</span>
+                </div>
+                
+                <div class="stats-row">
+                    <div class="stat-box">
+                        <span class="stat-number">1</span>
+                        <span class="stat-label">Page Analyzed</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-number">14</span>
+                        <span class="stat-label">Transactions Found</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-number">£44K</span>
+                        <span class="stat-label">Final Balance</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 2: Choose Export -->
+            <div class="step-container inactive" id="step2">
+                <div class="step-header">
+                    <div class="step-number">2</div>
+                    <div class="step-title">Choose how to use your data</div>
+                </div>
+
+                <div class="feature-grid">
+                    <div class="feature-card" id="excelCard">
+                        <div class="feature-icon">📊</div>
+                        <div class="feature-title">Export to Excel</div>
+                        <p class="feature-desc">Organized spreadsheet with formulas and categories</p>
+                    </div>
+
+                    <div class="feature-card" id="xmlCard">
+                        <div class="feature-icon">📋</div>
+                        <div class="feature-title">Export to XML</div>
+                        <p class="feature-desc">Import into accounting software like QuickBooks</p>
+                    </div>
+
+                    <div class="feature-card" id="dashboardCard">
+                        <div class="feature-icon">📈</div>
+                        <div class="feature-title">View Dashboard</div>
+                        <p class="feature-desc">AI-powered insights and spending analytics</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="app.js"></script>
 </body>
 </html>

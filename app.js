@@ -1,121 +1,90 @@
-// Wait for DOM to be fully loaded
+// Wait for DOM to be ready
 document.addEventListener('DOMContentLoaded', function() {
-    // Set PDF.js worker
-    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-
-    // DOM elements
-    const uploadArea = document.getElementById('uploadArea');
-    const fileInput = document.getElementById('fileInput');
-    const progressContainer = document.getElementById('progressContainer');
-    const progressFill = document.getElementById('progressFill');
-    const progressText = document.getElementById('progressText');
-    const resultArea = document.getElementById('resultArea');
-    const textOutput = document.getElementById('textOutput');
-    const pageCount = document.getElementById('pageCount');
-    const charCount = document.getElementById('charCount');
-    const btnClear = document.getElementById('btnClear');
-
-    // Click to upload
-    uploadArea.addEventListener('click', () => fileInput.click());
-
-// Drag and drop handlers
-uploadArea.addEventListener('dragover', (e) => {
-    e.preventDefault();
-    uploadArea.classList.add('dragover');
-});
-
-uploadArea.addEventListener('dragleave', () => {
-    uploadArea.classList.remove('dragover');
-});
-
-uploadArea.addEventListener('drop', (e) => {
-    e.preventDefault();
-    uploadArea.classList.remove('dragover');
-    const files = e.dataTransfer.files;
-    if (files.length > 0 && files[0].type === 'application/pdf') {
-        handleFile(files[0]);
-    }
-});
-
-// File input change
-fileInput.addEventListener('change', (e) => {
-    if (e.target.files.length > 0) {
-        handleFile(e.target.files[0]);
-    }
-});
-
-// Clear button
-btnClear.addEventListener('click', () => {
-    resultArea.style.display = 'none';
-    progressContainer.style.display = 'none';
-    uploadArea.style.display = 'block';
-    fileInput.value = '';
-    textOutput.textContent = '';
-});
-
-// Main file processing function
-async function handleFile(file) {
-    // Hide upload area, show progress
-    uploadArea.style.display = 'none';
-    progressContainer.style.display = 'block';
-    resultArea.style.display = 'none';
+    // Get DOM elements
+    const pdfCard = document.getElementById('pdfCard');
+    const step1 = document.getElementById('step1');
+    const step2 = document.getElementById('step2');
+    const processing = document.getElementById('processing');
+    const results = document.getElementById('results');
     
-    // Simulate upload progress
-    progressFill.style.width = '30%';
-    progressText.textContent = 'Loading PDF...';
-    
-    try {
-        // Read file as array buffer
-        const arrayBuffer = await file.arrayBuffer();
+    // Feature cards
+    const excelCard = document.getElementById('excelCard');
+    const xmlCard = document.getElementById('xmlCard');
+    const dashboardCard = document.getElementById('dashboardCard');
+
+    // Create confetti animation
+    function createConfetti() {
+        const colors = ['#10b981', '#34d399', '#6ee7b7', '#a7f3d0'];
         
-        progressFill.style.width = '50%';
-        progressText.textContent = 'Parsing document...';
-        
-        // Load PDF
-        const pdf = await pdfjsLib.getDocument({data: arrayBuffer}).promise;
-        const numPages = pdf.numPages;
-        
-        progressFill.style.width = '70%';
-        progressText.textContent = `Extracting text from ${numPages} pages...`;
-        
-        let fullText = '';
-        
-        // Extract text from each page
-        for (let i = 1; i <= numPages; i++) {
-            const page = await pdf.getPage(i);
-            const textContent = await page.getTextContent();
-            const pageText = textContent.items.map(item => item.str).join(' ');
-            fullText += `\n\n--- Page ${i} ---\n\n${pageText}`;
+        for (let i = 0; i < 40; i++) {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
             
-            // Update progress
-            const progress = 70 + (i / numPages) * 30;
-            progressFill.style.width = progress + '%';
-            progressText.textContent = `Extracting page ${i} of ${numPages}...`;
+            // Get card position for confetti origin
+            const rect = pdfCard.getBoundingClientRect();
+            confetti.style.left = (rect.left + rect.width / 2 + (Math.random() - 0.5) * 200) + 'px';
+            confetti.style.top = (rect.top + rect.height / 2) + 'px';
+            confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.animationDelay = (Math.random() * 0.2) + 's';
+            
+            // Random size
+            const size = 8 + Math.random() * 8;
+            confetti.style.width = size + 'px';
+            confetti.style.height = size + 'px';
+            
+            // Random shape (circle or square)
+            confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+            
+            document.body.appendChild(confetti);
+            
+            // Remove after animation
+            setTimeout(() => confetti.remove(), 1200);
         }
-        
-        // Complete
-        progressFill.style.width = '100%';
-        progressText.textContent = 'Complete!';
-        
-        // Show results
-        setTimeout(() => {
-            progressContainer.style.display = 'none';
-            resultArea.style.display = 'block';
-            textOutput.textContent = fullText.trim();
-            pageCount.textContent = numPages;
-            charCount.textContent = fullText.length.toLocaleString();
-        }, 500);
-        
-    } catch (error) {
-        console.error('Error processing PDF:', error);
-        progressText.textContent = 'Error processing PDF. Please try another file.';
-        progressText.style.color = '#ff4757';
-        
-        setTimeout(() => {
-            progressContainer.style.display = 'none';
-            uploadArea.style.display = 'block';
-        }, 2000);
     }
-}
 
-}); // End of DOMContentLoaded
+    // Handle PDF card click
+    pdfCard.addEventListener('click', function() {
+        if (!this.classList.contains('checked')) {
+            // Add checkmark
+            this.classList.add('checked');
+            
+            // Trigger confetti explosion
+            createConfetti();
+            
+            // Show processing after short delay
+            setTimeout(() => {
+                step1.style.opacity = '0.5';
+                processing.style.display = 'block';
+            }, 600);
+
+            // Show results and activate step 2
+            setTimeout(() => {
+                processing.style.display = 'none';
+                results.style.display = 'block';
+                
+                step1.classList.remove('active');
+                step1.classList.add('completed');
+                step1.style.opacity = '1';
+                
+                step2.classList.remove('inactive');
+                step2.classList.add('active');
+                
+                // Smooth scroll to step 2
+                step2.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 2500);
+        }
+    });
+
+    // Feature card click handlers
+    excelCard.addEventListener('click', function() {
+        alert('Excel export coming soon! This will generate a structured spreadsheet with your transactions.');
+    });
+
+    xmlCard.addEventListener('click', function() {
+        alert('XML export coming soon! This will create a machine-readable file for accounting software.');
+    });
+
+    dashboardCard.addEventListener('click', function() {
+        alert('Dashboard coming soon! This will show AI-powered insights and spending analytics.');
+    });
+});
